@@ -13,39 +13,38 @@
 @layer base {
   :root {
     --background: 0 0% 4%;
-    --foreground: 40 20% 92%;
+    --foreground: 0 0% 95%;
 
     --card: 0 0% 7%;
-    --card-foreground: 40 20% 92%;
+    --card-foreground: 0 0% 95%;
 
     --popover: 0 0% 7%;
-    --popover-foreground: 40 20% 92%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 40 60% 50%;
+    --primary: 0 0% 100%;
     --primary-foreground: 0 0% 4%;
 
     --secondary: 0 0% 12%;
-    --secondary-foreground: 40 20% 92%;
+    --secondary-foreground: 0 0% 95%;
 
     --muted: 0 0% 15%;
-    --muted-foreground: 40 10% 60%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 40 60% 50%;
+    --accent: 0 0% 100%;
     --accent-foreground: 0 0% 4%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 40 60% 50%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 80%;
 
     --radius: 1rem;
 
-    --gold: 40 60% 50%;
-    --gold-light: 40 70% 65%;
-    --gold-dark: 40 50% 35%;
-    --cream: 40 20% 92%;
+    --white: 0 0% 100%;
+    --white-muted: 0 0% 80%;
+    --gray: 0 0% 50%;
     --charcoal: 0 0% 10%;
   }
 }
@@ -71,17 +70,17 @@
 
 @layer components {
   .text-gradient-gold {
-    @apply bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-white via-white-muted to-white bg-clip-text text-transparent;
   }
 
   .btn-primary {
-    @apply bg-primary text-primary-foreground px-8 py-4 rounded-full font-medium 
-           transition-all duration-300 hover:bg-gold-light hover:scale-105 
-           active:scale-95 shadow-lg shadow-primary/20;
+    @apply bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-medium text-sm
+           transition-all duration-300 hover:bg-white-muted hover:scale-105 
+           active:scale-95 shadow-lg shadow-white/10;
   }
 
   .btn-outline {
-    @apply border-2 border-primary text-primary px-8 py-4 rounded-full font-medium 
+    @apply border-2 border-primary text-primary px-5 py-2.5 rounded-full font-medium text-sm
            transition-all duration-300 hover:bg-primary hover:text-primary-foreground
            active:scale-95;
   }
@@ -123,4 +122,41 @@
       opacity: 1;
     }
   }
+}
+
+/* Modern Date Picker Styling */
+input[type="date"] {
+  position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+input[type="date"]::-webkit-datetime-edit {
+  padding: 0;
+}
+
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+input[type="date"]::-webkit-datetime-edit-text {
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0 0.3em;
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: white;
 }

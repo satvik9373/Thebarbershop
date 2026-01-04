@@ -21,7 +21,7 @@ const About = () => {
               <span className="text-gradient-gold">Since Day One</span>
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              At THE BARBER SHOP 114, we believe every haircut tells a story. 
+              At THE BARBER SHOP, we believe every haircut tells a story. 
               Our skilled barbers combine time-honored techniques with contemporary 
               styles to create looks that define you.
             </p>
@@ -41,7 +41,7 @@ const About = () => {
             className="grid grid-cols-2 gap-6"
           >
             {[
-              { number: "114", label: "Years of Trust" },
+              { number: "10+", label: "Years of Trust" },
               { number: "5K+", label: "Happy Clients" },
               { number: "15+", label: "Expert Barbers" },
               { number: "100%", label: "Satisfaction" },

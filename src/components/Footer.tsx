@@ -9,7 +9,7 @@ const Footer = () => {
           {/* Logo */}
           <div className="text-center md:text-left">
             <h3 className="text-2xl font-medium mb-2">
-              THE BARBER <span className="text-gradient-gold">SHOP 114</span>
+              THE BARBER <span className="text-gradient-gold">SHOP</span>
             </h3>
             <p className="text-muted-foreground text-sm">
               Premium Grooming Experience
@@ -30,7 +30,7 @@ const Footer = () => {
 
         <div className="border-t border-border/50 mt-8 pt-8 text-center">
           <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} THE BARBER SHOP 114. All rights reserved.
+            © {new Date().getFullYear()} THE BARBER SHOP. All rights reserved.
           </p>
         </div>
       </div>

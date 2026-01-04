@@ -39,7 +39,7 @@ const Hero = () => {
         >
           THE BARBER
           <br />
-          <span className="text-gradient-gold">SHOP 114</span>
+          <span className="text-gradient-gold">SHOP</span>
         </motion.h1>
 
         <motion.p

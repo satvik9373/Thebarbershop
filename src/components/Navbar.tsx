@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Calendar } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "#" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "Book", href: "#booking" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -34,8 +35,12 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <a href="#" className="text-xl font-medium">
-              BARBER<span className="text-primary">114</span>
+            <a href="#" className="flex items-center">
+              <img 
+                src="/Images/Thebarbershop-logo.jpeg" 
+                alt="The Barber Shop Logo" 
+                className="w-10 h-10 rounded-full object-cover border-2 border-primary/50"
+              />
             </a>
 
             {/* Desktop Nav */}
@@ -50,11 +55,11 @@ const Navbar = () => {
                 </a>
               ))}
               <a
-                href="tel:9669932228"
-                className="btn-primary py-3 px-6 text-sm flex items-center gap-2"
+                href="#booking"
+                className="btn-primary flex items-center gap-2"
               >
-                <Phone className="w-4 h-4" />
-                Book Now
+                <Calendar className="w-4 h-4" />
+                Schedule Appointment
               </a>
             </div>
 
@@ -94,14 +99,15 @@ const Navbar = () => {
                 </motion.a>
               ))}
               <motion.a
-                href="tel:9669932228"
+                href="#booking"
+                onClick={() => setIsOpen(false)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="btn-primary mt-4 flex items-center gap-3"
+                transition={{ delay: 0.5 }}
+                className="btn-primary mt-4 flex items-center gap-2"
               >
-                <Phone className="w-5 h-5" />
-                Call 9669932228
+                <Calendar className="w-4 h-4" />
+                Schedule Appointment
               </motion.a>
             </div>
           </motion.div>

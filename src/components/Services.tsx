@@ -1,30 +1,29 @@
 import { motion } from "framer-motion";
-import { Scissors, Sparkles, Droplets, Star } from "lucide-react";
 
 const services = [
   {
-    icon: Scissors,
-    title: "Classic Haircut",
-    description: "Precision cuts tailored to your face shape and style preferences.",
-    price: "₹400",
+    title: "Haircut",
+    subtitle: "Male & Female",
+    description: "Precision cuts tailored to your unique style and personality.",
+    image: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&q=80",
   },
   {
-    icon: Sparkles,
-    title: "Beard Styling",
-    description: "Expert beard trimming and shaping for a distinguished look.",
-    price: "₹250",
+    title: "Facial",
+    subtitle: "Rejuvenating",
+    description: "Deep cleansing and nourishing treatments for radiant skin.",
+    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80",
   },
   {
-    icon: Droplets,
-    title: "Hot Towel Shave",
-    description: "Traditional straight razor shave with hot towel treatment.",
-    price: "₹350",
+    title: "Hydrafacial",
+    subtitle: "Premium Care",
+    description: "Advanced hydration therapy for a refreshed, glowing complexion.",
+    image: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=80",
   },
   {
-    icon: Star,
-    title: "Premium Package",
-    description: "Complete grooming experience with haircut, beard, and facial.",
-    price: "₹800",
+    title: "Pedicure & Manicure",
+    subtitle: "Complete Care",
+    description: "Luxurious hand and foot treatments for ultimate relaxation.",
+    image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80",
   },
 ];
 
@@ -49,26 +48,42 @@ const Services = () => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
-            <motion.div
+            <motion.a
+              href="#booking"
               key={service.title}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="glass-card p-8 group cursor-pointer"
+              className="glass-card overflow-hidden group cursor-pointer block"
             >
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
-                <service.icon className="w-7 h-7 text-primary" />
+              {/* Image */}
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-white/60 text-xs uppercase tracking-wider">
+                    {service.subtitle}
+                  </span>
+                  <h3 className="text-xl font-medium text-white">{service.title}</h3>
+                </div>
               </div>
-              <h3 className="text-xl font-medium mb-3">{service.title}</h3>
-              <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
-                {service.description}
-              </p>
-              <div className="text-2xl font-medium text-gradient-gold">
-                {service.price}
+              
+              {/* Content */}
+              <div className="p-5">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                  {service.description}
+                </p>
+                <span className="text-primary text-sm font-medium group-hover:underline">
+                  Book Now →
+                </span>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>
