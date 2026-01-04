@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Book", href: "#booking" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "#", isRoute: false },
+  { label: "About", href: "#about", isRoute: false },
+  { label: "Services", href: "#services", isRoute: false },
+  { label: "Book", href: "#booking", isRoute: false },
+  { label: "Franchise", href: "/franchise", isRoute: true },
+  { label: "Contact", href: "#contact", isRoute: false },
 ];
 
 const Navbar = () => {
@@ -46,13 +48,23 @@ const Navbar = () => {
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-sm uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {link.label}
-                </a>
+                link.isRoute ? (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="text-sm uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="text-sm uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                )
               ))}
               <a
                 href="#booking"
@@ -86,24 +98,41 @@ const Navbar = () => {
           >
             <div className="flex flex-col items-center justify-center h-full gap-8">
               {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="text-2xl font-medium"
-                >
-                  {link.label}
-                </motion.a>
+                link.isRoute ? (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link
+                      to={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-2xl font-medium"
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="text-2xl font-medium"
+                  >
+                    {link.label}
+                  </motion.a>
+                )
               ))}
               <motion.a
                 href="#booking"
                 onClick={() => setIsOpen(false)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.6 }}
                 className="btn-primary mt-4 flex items-center gap-2"
               >
                 <Calendar className="w-4 h-4" />
