@@ -57,7 +57,7 @@ const Contact = () => {
                     {branch.phone}
                   </a>
                 </div>
-                <p className="text-muted-foreground/60 text-xs mt-2 pl-7">
+                <p className="text-white text-xs mt-2 pl-7">
                   For franchise queries, contact this number
                 </p>
               </div>
