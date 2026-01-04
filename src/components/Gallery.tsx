@@ -22,10 +22,10 @@ const Gallery = () => {
         className="text-center mb-12 px-6"
       >
         <span className="text-primary uppercase tracking-widest text-sm mb-4 block">
-          Our Work
+          See The Results
         </span>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium">
-          The <span className="text-gradient-gold">Gallery</span>
+          Real <span className="text-gradient-gold">Work</span>
         </h2>
       </motion.div>
 

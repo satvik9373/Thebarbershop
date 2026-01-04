@@ -71,7 +71,7 @@ const Navbar = () => {
                 className="btn-primary flex items-center gap-2"
               >
                 <Calendar className="w-4 h-4" />
-                Schedule Appointment
+                Book Now
               </a>
             </div>
 

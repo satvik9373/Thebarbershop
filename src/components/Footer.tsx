@@ -12,7 +12,7 @@ const Footer = () => {
               THE BARBER <span className="text-gradient-gold">SHOP</span>
             </h3>
             <p className="text-muted-foreground text-sm">
-              Premium Grooming Experience
+              Indore's Most Trusted Salon Since 2014
             </p>
           </div>
 

@@ -156,7 +156,7 @@ const Franchise = () => {
                 transition={{ delay: 0.3 }}
                 className="text-2xl md:text-3xl font-medium text-white mb-4"
               >
-                Application Submitted!
+                We Got It.
               </motion.h3>
 
               <motion.p
@@ -165,7 +165,7 @@ const Franchise = () => {
                 transition={{ delay: 0.4 }}
                 className="text-white/60 mb-8"
               >
-                Thank you for your interest in The Barber Shop franchise. Our team will review your application and get in touch with you soon at {formData.email}
+                Our team will review your details and reach out at {formData.email} within 48 hours.
               </motion.p>
 
               <motion.div
@@ -197,10 +197,10 @@ const Franchise = () => {
                 className="text-center mb-10"
               >
                 <h1 className="text-3xl md:text-4xl font-medium text-white mb-4">
-                  Want to get our franchise?
+                  Own a Barber Shop Franchise
                 </h1>
                 <p className="text-white/60 text-sm md:text-base">
-                  Fill the form with correct details and we will get in touch with you soon.
+                  10+ years. 5000+ clients. Proven model. Tell us about yourself and we'll take it from there.
                 </p>
               </motion.div>
 

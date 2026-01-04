@@ -234,7 +234,7 @@ const BookingForm = () => {
               transition={{ delay: 0.3 }}
               className="text-2xl md:text-3xl font-medium text-white mb-4"
             >
-              Appointment Booked!
+              You're All Set!
             </motion.h3>
             
             <motion.p
@@ -243,7 +243,7 @@ const BookingForm = () => {
               transition={{ delay: 0.4 }}
               className="text-white/60 mb-8"
             >
-              We've sent a confirmation to {formData.email}. For any queries, contact us at {BUSINESS_EMAIL}
+              Confirmation sent to {formData.email}. See you soon.
             </motion.p>
 
             <motion.div
@@ -292,10 +292,10 @@ const BookingForm = () => {
           className="text-center mb-12"
         >
           <span className="text-white/60 uppercase tracking-widest text-sm mb-4 block">
-            Reserve Your Spot
+            Takes 30 Seconds
           </span>
           <h2 className="text-4xl md:text-5xl font-medium text-white">
-            Book an Appointment
+            Book Your Slot
           </h2>
         </motion.div>
 

@@ -13,22 +13,22 @@ const About = () => {
             viewport={{ once: true }}
           >
             <span className="text-primary uppercase tracking-widest text-sm mb-4 block">
-              Our Story
+              Why Choose Us
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-6">
-              Craftsmanship
+              Not Just Haircuts.
               <br />
-              <span className="text-gradient-gold">Since Day One</span>
+              <span className="text-gradient-gold">Confidence.</span>
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              At THE BARBER SHOP, we believe every haircut tells a story. 
-              Our skilled barbers combine time-honored techniques with contemporary 
-              styles to create looks that define you.
+              10 years in Indore. Two prime locations. 15+ trained barbers who actually 
+              listen. We don't do rushed cuts. Every client gets the time and attention 
+              they deserve.
             </p>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Step into our shop and experience the perfect blend of classic 
-              barbershop tradition and modern luxury. From precision fades to 
-              hot towel shaves, we've got you covered.
+              Walk out looking sharp, feeling sharper. Whether it's a clean fade, 
+              a classic cut, or a full grooming session, we deliver results, 
+              not excuses.
             </p>
           </motion.div>
 
@@ -41,10 +41,10 @@ const About = () => {
             className="grid grid-cols-2 gap-6"
           >
             {[
-              { number: "10+", label: "Years of Trust" },
-              { number: "5K+", label: "Happy Clients" },
-              { number: "15+", label: "Expert Barbers" },
-              { number: "100%", label: "Satisfaction" },
+              { number: "10+", label: "Years in Indore" },
+              { number: "5000+", label: "Clients Served" },
+              { number: "15+", label: "Trained Barbers" },
+              { number: "2", label: "Prime Locations" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

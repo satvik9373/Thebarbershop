@@ -13,13 +13,13 @@ const Contact = () => {
           className="text-center mb-12"
         >
           <span className="text-primary uppercase tracking-widest text-sm mb-4 block">
-            Get In Touch
+            Find Us
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-6">
-            Book Your <span className="text-gradient-gold">Visit</span>
+            Two <span className="text-gradient-gold">Locations</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Ready to experience premium grooming? Visit us at one of our locations.
+            Vijay Nagar or Scheme 114. Pick what's closer. Same quality at both.
           </p>
         </motion.div>
 
@@ -108,10 +108,10 @@ const Contact = () => {
           className="glass-card p-6 md:p-8 text-center"
         >
           <h3 className="text-xl md:text-2xl font-medium mb-3">
-            Ready for a fresh look?
+            Stop scrolling. Start booking.
           </h3>
           <p className="text-muted-foreground text-sm mb-6 max-w-md mx-auto">
-            Walk in or call ahead. We're here to make you look your absolute best.
+            Walk-ins welcome. But if you want a guaranteed slot, book now. Takes 30 seconds.
           </p>
           <a
             href="#booking"

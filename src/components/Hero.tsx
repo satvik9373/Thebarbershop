@@ -27,7 +27,7 @@ const Hero = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <span className="inline-block text-primary uppercase tracking-widest text-sm mb-6">
-            Premium Grooming Experience
+            Indore's Most Trusted Salon Since 2014
           </span>
         </motion.div>
 
@@ -48,8 +48,8 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           className="text-muted-foreground text-lg md:text-xl max-w-xl mx-auto mb-10"
         >
-          Where precision meets style. Experience the art of classic grooming
-          with a modern touch.
+          5,000+ clients trust us for a reason. Expert cuts, premium facials, 
+          zero compromise. Your look, perfected.
         </motion.p>
 
         <motion.div
@@ -58,11 +58,11 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <a href="#contact" className="btn-primary">
-            Book Appointment
+          <a href="#booking" className="btn-primary">
+            Book Now
           </a>
           <a href="#services" className="btn-outline">
-            Our Services
+            See What We Do
           </a>
         </motion.div>
       </div>
