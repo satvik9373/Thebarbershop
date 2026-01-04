@@ -60,10 +60,11 @@ const VALID_MEDIA_PREFIXES = ["/uploads/", "/Images/", "https://", "http://"] as
 
 /** Cache for fetched content to avoid redundant requests */
 const contentCache: Record<string, unknown> = {};
+let cmsDataCache: Record<string, unknown> | null = null;
 
 /**
- * Fetch CMS content from JSON file
- * @param contentFile - Name of the content file (without .json extension)
+ * Fetch CMS content from API
+ * @param contentFile - Name of the content file (hero, services, gallery)
  * @returns Parsed content or null if fetch fails
  */
 export async function fetchContent<T>(contentFile: string): Promise<T | null> {
@@ -73,17 +74,21 @@ export async function fetchContent<T>(contentFile: string): Promise<T | null> {
   }
 
   try {
-    const url = `${CMS_BASE_PATH}/${contentFile}.json`;
-    const response = await fetch(url, {
-      cache: "no-cache", // Always get fresh content from CMS
-    });
+    // Fetch all CMS data if not cached
+    if (!cmsDataCache) {
+      const response = await fetch('/api/cms', {
+        cache: "no-cache",
+      });
 
-    if (!response.ok) {
-      console.warn(`[CMS] Content not found: ${contentFile} (${response.status})`);
-      return null;
+      if (!response.ok) {
+        console.warn(`[CMS] API not available (${response.status})`);
+        return null;
+      }
+
+      cmsDataCache = await response.json();
     }
 
-    const data = await response.json();
+    const data = cmsDataCache[contentFile];
     
     // Validate that we got an object
     if (!data || typeof data !== "object") {
@@ -95,7 +100,7 @@ export async function fetchContent<T>(contentFile: string): Promise<T | null> {
     return data as T;
   } catch (error) {
     // Only log warning, never throw - components will use fallbacks
-    console.warn(`[CMS] Failed to fetch: ${contentFile}`);
+    console.warn(`[CMS] Failed to fetch: ${contentFile}`, error);
     return null;
   }
 }
