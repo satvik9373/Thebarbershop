@@ -8,5 +8,112 @@
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      CMS.init({
+        config: {
+          backend: {
+            name: "git-gateway",
+            branch: "main"
+          },
+          media_folder: "public/uploads",
+          public_folder: "/uploads",
+          collections: [
+            {
+              name: "hero",
+              label: "Hero Section",
+              files: [
+                {
+                  name: "hero",
+                  label: "Hero Content",
+                  file: "public/content/hero.json",
+                  fields: [
+                    { label: "Tagline", name: "tagline", widget: "string" },
+                    { label: "Title", name: "title", widget: "string" },
+                    { label: "Title Highlight", name: "titleHighlight", widget: "string" },
+                    { label: "Description", name: "description", widget: "text" },
+                    { label: "Primary Button Text", name: "primaryButtonText", widget: "string" },
+                    { label: "Primary Button Link", name: "primaryButtonLink", widget: "string" },
+                    { label: "Secondary Button Text", name: "secondaryButtonText", widget: "string" },
+                    { label: "Secondary Button Link", name: "secondaryButtonLink", widget: "string" },
+                    {
+                      label: "Media",
+                      name: "media",
+                      widget: "object",
+                      fields: [
+                        { label: "Type", name: "type", widget: "select", options: ["image", "video"] },
+                        { label: "Source", name: "src", widget: "file" },
+                        { label: "Alt Text", name: "alt", widget: "string", required: false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              name: "gallery",
+              label: "Gallery Section",
+              files: [
+                {
+                  name: "gallery",
+                  label: "Gallery Content",
+                  file: "public/content/gallery.json",
+                  fields: [
+                    { label: "Tagline", name: "tagline", widget: "string" },
+                    { label: "Title", name: "title", widget: "string" },
+                    { label: "Title Highlight", name: "titleHighlight", widget: "string" },
+                    {
+                      label: "Items",
+                      name: "items",
+                      widget: "list",
+                      fields: [
+                        { label: "Type", name: "type", widget: "select", options: ["image", "video"] },
+                        { label: "Source", name: "src", widget: "file" },
+                        { label: "Alt Text", name: "alt", widget: "string", required: false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              name: "services",
+              label: "Services Section",
+              files: [
+                {
+                  name: "services",
+                  label: "Services Content",
+                  file: "public/content/services.json",
+                  fields: [
+                    { label: "Tagline", name: "tagline", widget: "string" },
+                    { label: "Title", name: "title", widget: "string" },
+                    { label: "Title Highlight", name: "titleHighlight", widget: "string" },
+                    {
+                      label: "Items",
+                      name: "items",
+                      widget: "list",
+                      fields: [
+                        { label: "Title", name: "title", widget: "string" },
+                        { label: "Subtitle", name: "subtitle", widget: "string" },
+                        { label: "Description", name: "description", widget: "text" },
+                        {
+                          label: "Media",
+                          name: "media",
+                          widget: "object",
+                          fields: [
+                            { label: "Type", name: "type", widget: "select", options: ["image", "video"] },
+                            { label: "Source", name: "src", widget: "file" },
+                            { label: "Alt Text", name: "alt", widget: "string", required: false }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      });
+    </script>
   </body>
 </html>
