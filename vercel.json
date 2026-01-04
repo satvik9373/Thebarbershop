@@ -1,4 +1,15 @@
 {
+  "headers": [
+    {
+      "source": "/admin/config.yml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/yaml; charset=utf-8"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/admin",
@@ -9,11 +20,7 @@
       "destination": "/admin/index.html"
     },
     {
-      "source": "/admin/config.yml",
-      "destination": "/admin/config.yml"
-    },
-    {
-      "source": "/((?!admin).*)",
+      "source": "/((?!admin|content|uploads|Images).*)",
       "destination": "/index.html"
     }
   ]
