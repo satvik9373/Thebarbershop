@@ -1,0 +1,15 @@
+{
+  "tagline": "Indore's Most Trusted Salon Since 2014",
+  "title": "THE BARBER",
+  "titleHighlight": "SHOP",
+  "description": "5,000+ clients trust us for a reason. Expert cuts, premium facials, zero compromise. Your look, perfected.",
+  "primaryButtonText": "Book Now",
+  "primaryButtonLink": "#booking",
+  "secondaryButtonText": "See What We Do",
+  "secondaryButtonLink": "#services",
+  "media": {
+    "type": "video",
+    "src": "/uploads/hero-video.mp4",
+    "alt": "The Barber Shop Hero"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "tagline": "See The Results",
+  "title": "Real",
+  "titleHighlight": "Work",
+  "items": [
+    {
+      "type": "image",
+      "src": "/Images/BarberShop-img/img-1.jpg",
+      "alt": "Haircut transformation 1"
+    },
+    {
+      "type": "image",
+      "src": "/Images/BarberShop-img/img-2.jpg",
+      "alt": "Haircut transformation 2"
+    },
+    {
+      "type": "image",
+      "src": "/Images/BarberShop-img/img-3.jpg",
+      "alt": "Haircut transformation 3"
+    },
+    {
+      "type": "image",
+      "src": "/Images/BarberShop-img/img-4.jpg",
+      "alt": "Haircut transformation 4"
+    }
+  ]
+}

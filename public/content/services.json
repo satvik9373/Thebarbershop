@@ -1,0 +1,47 @@
+{
+  "tagline": "What We Do Best",
+  "title": "Pick Your",
+  "titleHighlight": "Service",
+  "items": [
+    {
+      "title": "Haircut",
+      "subtitle": "Men & Women",
+      "description": "Clean fades, classic cuts, or something new. Tell us what you want and we'll make it happen.",
+      "media": {
+        "type": "image",
+        "src": "https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&q=80",
+        "alt": "Haircut service"
+      }
+    },
+    {
+      "title": "Facial",
+      "subtitle": "Deep Clean",
+      "description": "Tired skin? Dull face? Our facials clear out the gunk and bring back the glow.",
+      "media": {
+        "type": "image",
+        "src": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80",
+        "alt": "Facial service"
+      }
+    },
+    {
+      "title": "Hydrafacial",
+      "subtitle": "Premium",
+      "description": "The real deal. Medical-grade hydration that you'll see and feel instantly.",
+      "media": {
+        "type": "image",
+        "src": "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=80",
+        "alt": "Hydrafacial service"
+      }
+    },
+    {
+      "title": "Pedicure & Manicure",
+      "subtitle": "Full Service",
+      "description": "Hands and feet done right. Professional care, not a quick polish job.",
+      "media": {
+        "type": "image",
+        "src": "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80",
+        "alt": "Pedicure and Manicure service"
+      }
+    }
+  ]
+}
