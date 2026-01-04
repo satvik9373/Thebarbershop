@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Loader2, Calendar, Clock, User, Mail, Phone, MapPin } from "lucide-react";
+import { Check, Loader2, Calendar, Clock, User, Phone, MapPin } from "lucide-react";
 
 const branches = [
   { id: "branch-54", name: "The Barber Shop 54", address: "DF 62, Scheme No 54, Vijay Nagar, Indore" },
@@ -24,7 +24,6 @@ const BUSINESS_EMAIL = "thebarbershop114@gmail.com";
 
 interface FormData {
   fullName: string;
-  email: string;
   phone: string;
   branch: string;
   date: string;
@@ -33,7 +32,6 @@ interface FormData {
 
 interface FormErrors {
   fullName?: string;
-  email?: string;
   phone?: string;
   branch?: string;
   date?: string;
@@ -43,7 +41,6 @@ interface FormErrors {
 const BookingForm = () => {
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
-    email: "",
     phone: "",
     branch: "",
     date: "",
@@ -139,12 +136,6 @@ const BookingForm = () => {
       newErrors.fullName = "Name is required";
     }
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Invalid email format";
-    }
-
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required";
     } else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ""))) {
@@ -196,7 +187,6 @@ const BookingForm = () => {
   const resetForm = () => {
     setFormData({
       fullName: "",
-      email: "",
       phone: "",
       branch: "",
       date: "",
@@ -243,7 +233,7 @@ const BookingForm = () => {
               transition={{ delay: 0.4 }}
               className="text-white/60 mb-8"
             >
-              Confirmation sent to {formData.email}. See you soon.
+              Your appointment is confirmed. See you soon!
             </motion.p>
 
             <motion.div
@@ -337,40 +327,6 @@ const BookingForm = () => {
                     className="text-white/50 text-sm"
                   >
                     {errors.fullName}
-                  </motion.p>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Email */}
-            <div className="space-y-2">
-              <label className="block text-white/80 text-sm tracking-wide">
-                Email
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="john@example.com"
-                  className={`w-full bg-white/5 border ${
-                    errors.email ? "border-white/40" : "border-white/10"
-                  } rounded-xl py-4 pl-12 pr-4 text-white placeholder:text-white/30 
-                  focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent
-                  transition-all duration-200`}
-                />
-              </div>
-              <AnimatePresence>
-                {errors.email && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -5 }}
-                    className="text-white/50 text-sm"
-                  >
-                    {errors.email}
                   </motion.p>
                 )}
               </AnimatePresence>
