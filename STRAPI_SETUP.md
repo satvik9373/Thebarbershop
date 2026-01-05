@@ -15,7 +15,7 @@ cd barbershop-cms
 
 ### Hero (Single Type)
 1. Go to Content-Type Builder
-2. Create Single Type: `hero`
+2. Create Single Type: `hero-media`
 3. Add fields:
    - `tagline` (Text - Short text)
    - `title` (Text - Short text)
@@ -53,7 +53,7 @@ cd barbershop-cms
 
 1. Go to Settings → Users & Permissions Plugin → Roles → Public
 2. Enable permissions for:
-   - **hero**: `find`
+   - **hero-media**: `find`
    - **services**: `find`
    - **gallery**: `find`
 
