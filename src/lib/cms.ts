@@ -48,11 +48,40 @@ export interface ServicesContent {
 // CMS Configuration
 // =============================================================================
 
-/** CMS content is served from /public/content */
-const CMS_BASE_PATH = "/content";
+const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'http://localhost:1337';
+const STRAPI_API_URL = `${STRAPI_URL}/api`;
 
 /** Valid media path prefixes for security */
 const VALID_MEDIA_PREFIXES = ["/uploads/", "/Images/", "https://", "http://"] as const;
+
+// =============================================================================
+// Strapi Helper Functions
+// =============================================================================
+
+function getStrapiMediaUrl(media: any): string {
+  if (!media?.url) return '';
+  
+  // If URL is absolute, return as-is
+  if (media.url.startsWith('http')) {
+    return media.url;
+  }
+  
+  // Otherwise, prepend Strapi URL
+  return `${STRAPI_URL}${media.url}`;
+}
+
+function transformStrapiMedia(mediaData: any): MediaItem | null {
+  if (!mediaData) return null;
+  
+  const url = getStrapiMediaUrl(mediaData);
+  const mime = mediaData.mime || '';
+  
+  return {
+    type: mime.startsWith('video/') ? 'video' : 'image',
+    src: url,
+    alt: mediaData.alternativeText || mediaData.name || '',
+  };
+}
 
 // =============================================================================
 // CMS Content Fetching
@@ -62,8 +91,8 @@ const VALID_MEDIA_PREFIXES = ["/uploads/", "/Images/", "https://", "http://"] as
 const contentCache: Record<string, unknown> = {};
 
 /**
- * Fetch CMS content from JSON file
- * @param contentFile - Name of the content file (without .json extension)
+ * Fetch CMS content from Strapi API
+ * @param contentFile - Name of the content (hero, services, gallery)
  * @returns Parsed content or null if fetch fails
  */
 export async function fetchContent<T>(contentFile: string): Promise<T | null> {
@@ -73,8 +102,24 @@ export async function fetchContent<T>(contentFile: string): Promise<T | null> {
   }
 
   try {
-    const url = `${CMS_BASE_PATH}/${contentFile}.json`;
-    const response = await fetch(url, {
+    let endpoint = '';
+    
+    switch (contentFile) {
+      case 'hero':
+        endpoint = `${STRAPI_API_URL}/hero?populate=media`;
+        break;
+      case 'services':
+        endpoint = `${STRAPI_API_URL}/services?populate=items.media`;
+        break;
+      case 'gallery':
+        endpoint = `${STRAPI_API_URL}/gallery?populate=items`;
+        break;
+      default:
+        console.warn(`[CMS] Unknown content type: ${contentFile}`);
+        return null;
+    }
+
+    const response = await fetch(endpoint, {
       cache: "no-cache",
     });
 
@@ -83,19 +128,79 @@ export async function fetchContent<T>(contentFile: string): Promise<T | null> {
       return null;
     }
 
-    const data = await response.json();
+    const result = await response.json();
+    const strapiData = result.data?.attributes || result.data;
     
-    // Validate that we got an object
-    if (!data || typeof data !== "object") {
-      console.warn(`[CMS] Invalid content format: ${contentFile}`);
+    if (!strapiData) {
+      console.warn(`[CMS] Invalid Strapi response format: ${contentFile}`);
       return null;
     }
 
-    contentCache[contentFile] = data;
-    return data as T;
+    let transformedData: any = null;
+
+    // Transform Strapi data to match our interface
+    switch (contentFile) {
+      case 'hero':
+        transformedData = {
+          tagline: strapiData.tagline || '',
+          title: strapiData.title || '',
+          titleHighlight: strapiData.titleHighlight || '',
+          description: strapiData.description || '',
+          primaryButtonText: strapiData.primaryButtonText || '',
+          primaryButtonLink: strapiData.primaryButtonLink || '',
+          secondaryButtonText: strapiData.secondaryButtonText || '',
+          secondaryButtonLink: strapiData.secondaryButtonLink || '',
+          media: transformStrapiMedia(strapiData.media?.data?.attributes) || {
+            type: 'video',
+            src: '',
+            alt: '',
+          },
+        };
+        break;
+
+      case 'services':
+        transformedData = {
+          tagline: strapiData.tagline || '',
+          title: strapiData.title || '',
+          titleHighlight: strapiData.titleHighlight || '',
+          items: (strapiData.items || []).map((item: any) => ({
+            title: item.title || '',
+            subtitle: item.subtitle || '',
+            description: item.description || '',
+            media: transformStrapiMedia(item.media?.data?.attributes) || {
+              type: 'image',
+              src: '',
+              alt: '',
+            },
+          })),
+        };
+        break;
+
+      case 'gallery':
+        transformedData = {
+          tagline: strapiData.tagline || '',
+          title: strapiData.title || '',
+          titleHighlight: strapiData.titleHighlight || '',
+          items: (strapiData.items?.data || []).map((item: any) => {
+            const attrs = item.attributes;
+            return transformStrapiMedia(attrs) || {
+              type: 'image',
+              src: '',
+              alt: '',
+            };
+          }),
+        };
+        break;
+    }
+
+    if (transformedData) {
+      contentCache[contentFile] = transformedData;
+      return transformedData as T;
+    }
+
+    return null;
   } catch (error) {
-    // Only log warning, never throw - components will use fallbacks
-    console.warn(`[CMS] Failed to fetch: ${contentFile}`);
+    console.warn(`[CMS] Failed to fetch from Strapi: ${contentFile}`, error);
     return null;
   }
 }

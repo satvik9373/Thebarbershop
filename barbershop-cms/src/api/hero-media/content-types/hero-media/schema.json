@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "hero_medias",
+  "info": {
+    "singularName": "hero-media",
+    "pluralName": "hero-medias",
+    "displayName": "Hero Media"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "media": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}
