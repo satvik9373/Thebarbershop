@@ -11,14 +11,22 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGalleryImages = async () => {
       try {
-        const res = await fetch(`${STRAPI_URL}/api/gallery-images?populate=*`);
+        const res = await fetch(`${STRAPI_URL}/api/image-gallery?populate=*`, {
+          cache: "no-store",
+        });
+
+        if (!res.ok) {
+          console.error("[Gallery] API failed");
+          setIsLoading(false);
+          return;
+        }
+
         const json = await res.json();
 
-        const galleryImages = json?.data?.gallery;
+        const galleryImages = json?.data?.imggallery;
 
         if (Array.isArray(galleryImages)) {
           const urls = galleryImages
-            .slice(0, 4)
             .map((img: any) => {
               const url = img?.url;
               if (!url) return null;
