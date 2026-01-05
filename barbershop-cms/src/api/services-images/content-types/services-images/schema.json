@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "servicesimages",
+  "info": {
+    "singularName": "services-images",
+    "pluralName": "servicesimages",
+    "displayName": "services-images"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "serviceimg": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}
