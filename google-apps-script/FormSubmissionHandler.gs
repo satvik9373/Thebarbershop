@@ -17,21 +17,22 @@ function doPost(e) {
     }
 
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const formData = payload.data || {}; // Get nested data
+    
+    // Check if data is nested or at root level
+    const formData = payload.data || payload; // Try nested first, then root
+    
+    Logger.log("Form data being used: " + JSON.stringify(formData));
 
     if (payload.type === "appointment") {
       const sheet = ss.getSheetByName("Appointment");
       
-      // Log what we're writing
-      Logger.log("Writing appointment: " + JSON.stringify(formData));
-      
       sheet.appendRow([
         new Date(),
-        formData.fullName || "",
-        formData.phone || "",
-        formData.branch || "",
-        formData.date || "",
-        formData.timeSlot || ""
+        formData.fullName || "MISSING",
+        formData.phone || "MISSING",
+        formData.branch || "MISSING",
+        formData.date || "MISSING",
+        formData.timeSlot || "MISSING"
       ]);
     }
 
@@ -40,13 +41,13 @@ function doPost(e) {
       
       sheet.appendRow([
         new Date(),
-        formData.fullName || "",
-        formData.email || "",
-        formData.phone || "",
-        formData.city || "",
-        formData.occupation || "",
-        formData.investment || "",
-        formData.message || ""
+        formData.fullName || "MISSING",
+        formData.email || "MISSING",
+        formData.phone || "MISSING",
+        formData.city || "MISSING",
+        formData.occupation || "MISSING",
+        formData.investment || "MISSING",
+        formData.message || "MISSING"
       ]);
     }
 
