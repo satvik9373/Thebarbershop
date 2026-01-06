@@ -18,8 +18,8 @@ function doPost(e) {
 
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     
-    // Data is at root level, not nested
-    const formData = payload;
+    // Check if data is nested or at root level
+    const formData = payload.data || payload; // Try nested first, then root
     
     Logger.log("Form data being used: " + JSON.stringify(formData));
 
@@ -32,7 +32,7 @@ function doPost(e) {
         formData.phone || "MISSING",
         formData.branch || "MISSING",
         formData.date || "MISSING",
-        formData.timeSlot || "MISSING"
+        formData.time || formData.timeSlot || "MISSING"
       ]);
     }
 
