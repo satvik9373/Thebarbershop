@@ -166,22 +166,24 @@ const BookingForm = () => {
     setIsSubmitting(true);
 
     try {
+      const payload = {
+        secret: import.meta.env.VITE_GSHEET_SECRET,
+        type: "appointment",
+        fullName: formData.fullName,
+        phone: formData.phone,
+        branch: branches.find(b => b.id === formData.branch)?.name || formData.branch,
+        date: formData.date,
+        timeSlot: formData.timeSlot,
+      };
+
+      console.log("Sending to Google Sheets:", payload);
+
       await fetch(import.meta.env.VITE_GSHEET_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "text/plain;charset=utf-8",
         },
-        body: JSON.stringify({
-          secret: import.meta.env.VITE_GSHEET_SECRET,
-          type: "appointment",
-          data: {
-            fullName: formData.fullName,
-            phone: formData.phone,
-            branch: branches.find(b => b.id === formData.branch)?.name || formData.branch,
-            date: formData.date,
-            timeSlot: formData.timeSlot,
-          },
-        }),
+        body: JSON.stringify(payload),
       });
 
       setIsSuccess(true);

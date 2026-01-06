@@ -87,24 +87,26 @@ const Franchise = () => {
     setIsSubmitting(true);
 
     try {
+      const payload = {
+        secret: import.meta.env.VITE_GSHEET_SECRET,
+        type: "franchise",
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        city: formData.city,
+        occupation: formData.occupation,
+        investment: formData.investment,
+        message: formData.message,
+      };
+
+      console.log("Sending to Google Sheets:", payload);
+
       await fetch(import.meta.env.VITE_GSHEET_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "text/plain;charset=utf-8",
         },
-        body: JSON.stringify({
-          secret: import.meta.env.VITE_GSHEET_SECRET,
-          type: "franchise",
-          data: {
-            fullName: formData.fullName,
-            email: formData.email,
-            phone: formData.phone,
-            city: formData.city,
-            occupation: formData.occupation,
-            investment: formData.investment,
-            message: formData.message,
-          },
-        }),
+        body: JSON.stringify(payload),
       });
 
       setIsSuccess(true);
