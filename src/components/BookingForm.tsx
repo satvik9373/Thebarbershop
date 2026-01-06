@@ -183,7 +183,6 @@ const BookingForm = () => {
       });
 
       setIsSuccess(true);
-      alert("Form submitted successfully! We'll contact you shortly.");
       
     } catch (error) {
       console.error("Submission error:", error);
