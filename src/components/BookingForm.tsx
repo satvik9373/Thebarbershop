@@ -174,13 +174,11 @@ const BookingForm = () => {
         body: JSON.stringify({
           secret: import.meta.env.VITE_GSHEET_SECRET,
           type: "appointment",
-          data: {
-            fullName: formData.fullName,
-            phone: formData.phone,
-            branch: branches.find(b => b.id === formData.branch)?.name || formData.branch,
-            date: formData.date,
-            timeSlot: formData.timeSlot,
-          },
+          fullName: formData.fullName,
+          phone: formData.phone,
+          branch: branches.find(b => b.id === formData.branch)?.name || formData.branch,
+          date: formData.date,
+          time: formData.timeSlot,
         }),
       });
 

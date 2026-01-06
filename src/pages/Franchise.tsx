@@ -95,15 +95,13 @@ const Franchise = () => {
         body: JSON.stringify({
           secret: import.meta.env.VITE_GSHEET_SECRET,
           type: "franchise",
-          data: {
-            fullName: formData.fullName,
-            email: formData.email,
-            phone: formData.phone,
-            city: formData.city,
-            occupation: formData.occupation,
-            investment: formData.investment,
-            message: formData.message,
-          },
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          city: formData.city,
+          occupation: formData.occupation,
+          investment: formData.investment,
+          message: formData.message,
         }),
       });
 
