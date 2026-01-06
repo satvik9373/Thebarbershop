@@ -166,17 +166,21 @@ const BookingForm = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(import.meta.env.VITE_GSHEET_ENDPOINT, {
+      await fetch(import.meta.env.VITE_GSHEET_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
         body: JSON.stringify({
-          type: "appointment",
           secret: import.meta.env.VITE_GSHEET_SECRET,
-          fullName: formData.fullName,
-          phone: formData.phone,
-          branch: branches.find(b => b.id === formData.branch)?.name || formData.branch,
-          date: formData.date,
-          timeSlot: formData.timeSlot,
+          type: "appointment",
+          data: {
+            fullName: formData.fullName,
+            phone: formData.phone,
+            branch: branches.find(b => b.id === formData.branch)?.name || formData.branch,
+            date: formData.date,
+            timeSlot: formData.timeSlot,
+          },
         }),
       });
 

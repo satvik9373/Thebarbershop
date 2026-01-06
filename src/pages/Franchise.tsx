@@ -87,19 +87,23 @@ const Franchise = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(import.meta.env.VITE_GSHEET_ENDPOINT, {
+      await fetch(import.meta.env.VITE_GSHEET_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
         body: JSON.stringify({
-          type: "franchise",
           secret: import.meta.env.VITE_GSHEET_SECRET,
-          fullName: formData.fullName,
-          email: formData.email,
-          phone: formData.phone,
-          city: formData.city,
-          occupation: formData.occupation,
-          investment: formData.investment,
-          message: formData.message,
+          type: "franchise",
+          data: {
+            fullName: formData.fullName,
+            email: formData.email,
+            phone: formData.phone,
+            city: formData.city,
+            occupation: formData.occupation,
+            investment: formData.investment,
+            message: formData.message,
+          },
         }),
       });
 
