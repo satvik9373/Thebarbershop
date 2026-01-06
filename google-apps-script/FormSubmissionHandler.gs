@@ -1,4 +1,5 @@
 const SECRET_KEY = "barbershop_secret_2026";
+const NOTIFY_EMAIL = "thebarbershop114@gmail.com";
 
 function doPost(e) {
   try {
