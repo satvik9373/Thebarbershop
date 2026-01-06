@@ -105,11 +105,13 @@ const Franchise = () => {
         }),
       });
 
+      // Small delay for better UX
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setIsSubmitting(false);
       setIsSuccess(true);
       
     } catch (error) {
       console.error("Submission error:", error);
-    } finally {
       setIsSubmitting(false);
     }
   };
