@@ -165,11 +165,30 @@ const BookingForm = () => {
 
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch(import.meta.env.VITE_GSHEET_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "appointment",
+          secret: import.meta.env.VITE_GSHEET_SECRET,
+          fullName: formData.fullName,
+          phone: formData.phone,
+          branch: branches.find(b => b.id === formData.branch)?.name || formData.branch,
+          date: formData.date,
+          timeSlot: formData.timeSlot,
+        }),
+      });
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+      setIsSuccess(true);
+      alert("Form submitted successfully! We'll contact you shortly.");
+      
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("There was an issue submitting your form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (

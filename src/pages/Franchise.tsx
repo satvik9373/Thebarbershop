@@ -86,11 +86,32 @@ const Franchise = () => {
 
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch(import.meta.env.VITE_GSHEET_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "franchise",
+          secret: import.meta.env.VITE_GSHEET_SECRET,
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          city: formData.city,
+          occupation: formData.occupation,
+          investment: formData.investment,
+          message: formData.message,
+        }),
+      });
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+      setIsSuccess(true);
+      alert("Form submitted successfully! We'll contact you shortly.");
+      
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("There was an issue submitting your form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
