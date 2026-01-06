@@ -3,7 +3,9 @@ export default ({ env }) => ({
     config: {
       provider: "cloudinary",
       providerOptions: {
-        cloudinary_url: env("CLOUDINARY_URL"),
+        cloud_name: env("CLOUDINARY_NAME"),
+        api_key: env("CLOUDINARY_KEY"),
+        api_secret: env("CLOUDINARY_SECRET"),
       },
     },
   },
