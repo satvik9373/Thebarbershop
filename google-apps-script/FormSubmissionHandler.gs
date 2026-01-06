@@ -32,7 +32,7 @@ function doPost(e) {
         formData.phone || "MISSING",
         formData.branch || "MISSING",
         formData.date || "MISSING",
-        formData.timeSlot || "MISSING"
+        formData.time || formData.timeSlot || "MISSING"
       ]);
     }
 
