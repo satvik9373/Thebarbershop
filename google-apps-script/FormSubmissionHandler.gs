@@ -1,5 +1,8 @@
 const SECRET_KEY = "barbershop_secret_2026";
-const NOTIFY_EMAIL = "thebarbershop114@gmail.com";
+const NOTIFY_EMAILS = [
+  "thebarbershop114@gmail.com",
+  "Satvikchaturvedi8989@gmail.com"
+];
 
 function doPost(e) {
   try {
@@ -15,6 +18,7 @@ function doPost(e) {
     }
 
     const ss = SpreadsheetApp.getActiveSpreadsheet();
+    let emailBody = "";
 
     if (payload.type === "appointment") {
       const sheet = ss.getSheetByName("Appointment");
@@ -26,6 +30,18 @@ function doPost(e) {
         payload.date,
         payload.time
       ]);
+      
+      emailBody = `
+        <h2>🧔 New Appointment Booking</h2>
+        <p><strong>Name:</strong> ${payload.fullName}</p>
+        <p><strong>Phone:</strong> ${payload.phone}</p>
+        <p><strong>Branch:</strong> ${payload.branch}</p>
+        <p><strong>Date:</strong> ${payload.date}</p>
+        <p><strong>Time:</strong> ${payload.time}</p>
+        <hr>
+        <p><em>Submitted at: ${new Date().toLocaleString()}</em></p>
+      `;
+      
     } else if (payload.type === "franchise") {
       const sheet = ss.getSheetByName("Franchise");
       sheet.appendRow([
@@ -38,9 +54,30 @@ function doPost(e) {
         payload.investment,
         payload.message
       ]);
+      
+      emailBody = `
+        <h2>🚀 New Franchise Enquiry</h2>
+        <p><strong>Name:</strong> ${payload.fullName}</p>
+        <p><strong>Email:</strong> ${payload.email}</p>
+        <p><strong>Phone:</strong> ${payload.phone}</p>
+        <p><strong>City:</strong> ${payload.city}</p>
+        <p><strong>Occupation:</strong> ${payload.occupation}</p>
+        <p><strong>Investment:</strong> ${payload.investment}</p>
+        <p><strong>Message:</strong> ${payload.message}</p>
+        <hr>
+        <p><em>Submitted at: ${new Date().toLocaleString()}</em></p>
+      `;
+      
     } else {
       return createResponse({ error: "Invalid type" });
     }
+
+    // Send email notification
+    MailApp.sendEmail({
+      to: NOTIFY_EMAILS.join(","),
+      subject: "🧔 New Appointment / Franchise Submission",
+      htmlBody: emailBody,
+    });
 
     return createResponse({ success: true });
 
