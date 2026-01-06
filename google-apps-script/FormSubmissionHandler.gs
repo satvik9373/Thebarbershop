@@ -1,16 +1,17 @@
-const SECRET_KEY = "YOUR_SECRET_KEY"; // same as frontend
+const SECRET_KEY = "barbershop_secret_2026"; // same as frontend
 
 function doPost(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
+    const payload = JSON.parse(e.postData.contents);
 
-    if (data.secret !== SECRET_KEY) {
+    if (payload.secret !== SECRET_KEY) {
       return json({ error: "Unauthorized" });
     }
 
     const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const data = payload.data; // Extract the nested data object
 
-    if (data.type === "appointment") {
+    if (payload.type === "appointment") {
       const sheet = ss.getSheetByName("Appointment");
       sheet.appendRow([
         new Date(),
@@ -22,7 +23,7 @@ function doPost(e) {
       ]);
     }
 
-    if (data.type === "franchise") {
+    if (payload.type === "franchise") {
       const sheet = ss.getSheetByName("Franchise");
       sheet.appendRow([
         new Date(),
@@ -31,8 +32,8 @@ function doPost(e) {
         data.phone,
         data.city,
         data.occupation,
-        data.budget,
-        data.reason || ""
+        data.investment,
+        data.message || ""
       ]);
     }
 
