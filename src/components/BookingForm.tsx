@@ -186,7 +186,6 @@ const BookingForm = () => {
       
     } catch (error) {
       console.error("Submission error:", error);
-      alert("There was an issue submitting your form. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
