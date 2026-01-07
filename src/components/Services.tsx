@@ -1,62 +1,34 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import MediaRenderer from "./MediaRenderer";
-
-const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || "http://localhost:1337";
 
 const staticServices = [
   {
     title: "Haircut",
     subtitle: "Men & Women",
     description: "Clean fades, classic cuts, or something new. Tell us what you want and we'll make it happen.",
+    image: "/Images/BarberShop-img/Service-img/HairCut.jpg",
   },
   {
     title: "Facial",
     subtitle: "Deep Clean",
     description: "Tired skin? Dull face? Our facials clear out the gunk and bring back the glow.",
+    image: "/Images/BarberShop-img/Service-img/Facial.jpg",
   },
   {
     title: "Hydrafacial",
     subtitle: "Premium",
     description: "The real deal. Medical-grade hydration that you'll see and feel instantly.",
+    image: "/Images/BarberShop-img/Service-img/Hydrafacial.jpg",
   },
   {
     title: "Pedicure & Manicure",
     subtitle: "Full Service",
     description: "Hands and feet done right. Professional care, not a quick polish job.",
+    image: "/Images/BarberShop-img/Service-img/Pedicure.jpg",
   },
 ];
 
 const Services = () => {
-  const [images, setImages] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchServiceImages = async () => {
-      try {
-        const res = await fetch(`${STRAPI_URL}/api/services-images?populate=*`);
-        const json = await res.json();
-
-        const serviceImages = json?.data?.serviceimg;
-
-        if (Array.isArray(serviceImages)) {
-          const urls = serviceImages.map((img: any) => {
-            const url = img?.url;
-            if (!url) return null;
-            return url.startsWith("http") ? url : `${STRAPI_URL}${url}`;
-          }).filter(Boolean);
-
-          setImages(urls);
-        }
-      } catch (err) {
-        console.error("[Services] Strapi fetch error:", err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchServiceImages();
-  }, []);
 
   return (
     <section id="services" className="section-padding bg-secondary/30">
@@ -77,31 +49,26 @@ const Services = () => {
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {staticServices.map((service, index) => {
-            const imageSrc = images[index];
-
-            return (
-              <motion.a
-                href="#booking"
-                key={`service-${service.title}-${index}`}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="glass-card overflow-hidden group cursor-pointer block"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  {!isLoading && imageSrc && (
-                    <MediaRenderer
-                      type="image"
-                      src={imageSrc}
-                      alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      videoClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          {staticServices.map((service, index) => (
+            <motion.a
+              href="#booking"
+              key={`service-${service.title}-${index}`}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              className="glass-card overflow-hidden group cursor-pointer block"
+            >
+              <div className="relative h-48 overflow-hidden">
+                <MediaRenderer
+                  type="image"
+                  src={service.image}
+                  alt={service.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  videoClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <span className="text-white/60 text-xs uppercase tracking-wider">
                       {service.subtitle}
@@ -118,9 +85,8 @@ const Services = () => {
                     Get This →
                   </span>
                 </div>
-              </motion.a>
-            );
-          })}
+            </motion.a>
+          ))}
         </div>
       </div>
     </section>

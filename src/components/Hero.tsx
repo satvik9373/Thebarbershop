@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import MediaRenderer from "./MediaRenderer";
 
@@ -15,77 +14,39 @@ interface HeroContent {
     type: "image" | "video";
     src: string;
     alt: string;
-  } | null;
+  };
 }
 
-const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || "http://localhost:1337";
+const content: HeroContent = {
+  tagline: "Indore's Most Trusted Salon Since 2014",
+  title: "THE BARBER",
+  titleHighlight: "SHOP",
+  description: "5,000+ clients trust us for a reason. Expert cuts, premium facials, zero compromise. Your look, perfected.",
+  primaryButtonText: "Book Now",
+  primaryButtonLink: "#booking",
+  secondaryButtonText: "See What We Do",
+  secondaryButtonLink: "#services",
+  media: {
+    type: "video",
+    src: "/uploads/hero-video.mp4",
+    alt: "The Barber Shop Hero Video",
+  },
+};
 
 const Hero = () => {
-  const [content, setContent] = useState<HeroContent>({
-    tagline: "Indore's Most Trusted Salon Since 2014",
-    title: "THE BARBER",
-    titleHighlight: "SHOP",
-    description: "5,000+ clients trust us for a reason. Expert cuts, premium facials, zero compromise. Your look, perfected.",
-    primaryButtonText: "Book Now",
-    primaryButtonLink: "#booking",
-    secondaryButtonText: "See What We Do",
-    secondaryButtonLink: "#services",
-    media: null,
-  });
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchHeroMedia = async () => {
-      try {
-        const res = await fetch(`${STRAPI_URL}/api/hero-media?populate=*`);
-        const json = await res.json();
-
-        const media = json?.data?.media;
-
-        if (!media?.url) {
-          setIsLoading(false);
-          return;
-        }
-
-        const fullUrl = media.url.startsWith("http")
-          ? media.url
-          : `${STRAPI_URL}${media.url}`;
-
-        const mediaType: "image" | "video" =
-          media.mime?.startsWith("video/") ? "video" : "image";
-
-        setContent((prev) => ({
-          ...prev,
-          media: {
-            type: mediaType,
-            src: fullUrl,
-            alt: media.alternativeText || media.name || "Hero image",
-          },
-        }));
-      } catch (err) {
-        console.error("[Hero] Strapi fetch error:", err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchHeroMedia();
-  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Media Background */}
       <div className="absolute inset-0 z-0">
-        {!isLoading && content.media?.src && (
-          <MediaRenderer
-            type={content.media.type}
-            src={content.media.src}
-            alt={content.media.alt}
-            className="w-full h-full object-cover"
-            videoClassName="w-full h-full object-cover"
-            fallbackSrc=""
-          />
-        )}
+        <MediaRenderer
+          type={content.media.type}
+          src={content.media.src}
+          alt={content.media.alt}
+          className="w-full h-full object-cover"
+          videoClassName="w-full h-full object-cover"
+          fallbackSrc=""
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-transparent to-background/50" />
       </div>

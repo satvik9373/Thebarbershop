@@ -1,50 +1,15 @@
-import { useState, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import MediaRenderer from "./MediaRenderer";
 
-const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || "http://localhost:1337";
+const images = [
+  "/Images/BarberShop-img/img-1.jpg",
+  "/Images/BarberShop-img/img-2.jpg",
+  "/Images/BarberShop-img/img-3.jpg",
+  "/Images/BarberShop-img/img-4.jpg",
+];
 
 const Gallery = () => {
-  const [images, setImages] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchGalleryImages = async () => {
-      try {
-        const res = await fetch(`${STRAPI_URL}/api/image-gallery?populate=*`, {
-          cache: "no-store",
-        });
-
-        if (!res.ok) {
-          console.error("[Gallery] API failed");
-          setIsLoading(false);
-          return;
-        }
-
-        const json = await res.json();
-
-        const galleryImages = json?.data?.imggallery;
-
-        if (Array.isArray(galleryImages)) {
-          const urls = galleryImages
-            .map((img: any) => {
-              const url = img?.url;
-              if (!url) return null;
-              return url.startsWith("http") ? url : `${STRAPI_URL}${url}`;
-            })
-            .filter(Boolean);
-
-          setImages(urls);
-        }
-      } catch (err) {
-        console.error("[Gallery] Strapi fetch error:", err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchGalleryImages();
-  }, []);
 
   const duplicatedItems = useMemo(
     () => (images.length > 0 ? [...images, ...images, ...images] : []),
@@ -76,8 +41,7 @@ const Gallery = () => {
       <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-      {!isLoading && duplicatedItems.length > 0 && (
-        <div className="relative">
+      <div className="relative">
           <motion.div
             className="flex gap-6"
             animate={{
@@ -107,7 +71,6 @@ const Gallery = () => {
             ))}
           </motion.div>
         </div>
-      )}
     </section>
   );
 };
